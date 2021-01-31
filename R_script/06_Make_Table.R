@@ -21,7 +21,7 @@ Organism_list<-function(culture_df,length=-1){
 group_name<-c('No sepsis','Sepsis before ECMO','Sepsis during ECMO')
 options(ztable.type='viewer')
 
-label_data<-read_csv('label.csv')
+label_data<-read_csv('Input/label.csv')
 labels<-names(anal_data)
 names(labels)<-labels
 labels[label_data$var_name]<-label_data$label

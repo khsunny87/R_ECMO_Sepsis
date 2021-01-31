@@ -12,7 +12,7 @@ Get_Orgname<-function(sp_str){
   return(ret)
 }
 
-raw_Cx<-read_csv("culture_merge.txt",col_types=cols(ID=col_character(),
+raw_Cx<-read_csv("Input/culture_merge.txt",col_types=cols(ID=col_character(),
                                                     sp1=col_character(),
                                                     sp2=col_character(),
                                                     sp3=col_character(),
