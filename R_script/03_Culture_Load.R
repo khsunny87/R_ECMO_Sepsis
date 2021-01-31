@@ -77,11 +77,9 @@ for(i in 1:nrow(inc_data3)){
                      filter((lab_performed_time-inc_data3$`Insertion_ECMO_시술일`[i])/ddays(1)<LM_cut)%>%
                      count())>0
     
-  inc_data3$Blood_Cx[i]<-(raw_Cx%>%
-                            filter(ID==iID,Cx_result,lab_performed_time>=inc_data3$`Insertion_ECMO_시술일`[i],str_detect(specimen,"^Blood,"))%>%
-                            count())>0
+  inc_data3$Blood_Cx[i]<-(raw_Cx%>%filter(ID==iID,Cx_result,lab_performed_time>=inc_data3$`Insertion_ECMO_시술일`[i],str_detect(specimen,'^Blood,'))%>%count())>0
   inc_data3$LM_Blood[i]<-(raw_Cx%>%
-                          filter(ID==iID,Cx_result,lab_performed_time>=inc_data3$`Insertion_ECMO_시술일`[i],str_detect(specimen,"^Blood,"))%>%
+                          filter(ID==iID,Cx_result,lab_performed_time>=inc_data3$`Insertion_ECMO_시술일`[i],str_detect(specimen,'^Blood,'))%>%
                             filter((lab_performed_time-inc_data3$`Insertion_ECMO_시술일`[i])/ddays(1)<LM_cut)%>%
                           count())>0
   

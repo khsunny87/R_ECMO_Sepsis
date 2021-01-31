@@ -3,7 +3,7 @@ library(purrr)
 library(lubridate)
 
 
-
+#2회이상 삽입 제거
 Check_Name<-function(pt_name){
   if(!str_detect(pt_name,"#\\d+$")) return(T)
   if(str_detect(pt_name,"#1")) return(T)

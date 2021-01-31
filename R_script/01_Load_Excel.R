@@ -5,8 +5,11 @@ library(stringr)
 library(tidyr)
 library(moonBook)
 
+
+#에크모 데이터 로딩
 fname<-'Input/[201001] ECMO CRF.xlsx'
 
+#변수설정
 read_excel(fname,n_max=2,col_names=F)%>%t()%>%as.data.frame()->tmp
 var_name<-paste0(tmp[[1]],'_',gsub(" ","_",tmp[[2]]))
 
