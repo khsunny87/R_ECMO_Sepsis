@@ -2,6 +2,7 @@ library(ztable)
 library(sjlabelled)
 library(forcats)
 library(kableExtra)
+library(readr)
 
 Get_DF<-function(org_rank){
   return(data.frame(Organism=names(org_rank),Freqeuncy=as.vector(org_rank)))
