@@ -48,8 +48,11 @@ tbl_data%>%
   mytable(Outcome_Weaning_success~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
   ztable()
+
+
 library(stats)
 
+#multivariable Logistic regression
 tbl_data%>%
   filter(Outcome_Weaning_success!='전원')->df
 res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+Insertion_ECMO_type+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
