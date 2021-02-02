@@ -20,7 +20,8 @@ Organism_list<-function(culture_df,length=-1){
 }
 
 group_name<-c('No sepsis','Sepsis before ECMO','Sepsis during ECMO')
-options(ztable.type='viewer')
+options(ztable.type='html')
+#options(ztable.type='viewer')
 
 label_data<-read_csv('Input/label.csv')
 labels<-names(anal_data)
@@ -38,7 +39,7 @@ tbl_data%>%
   mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
   mytable(Outcome_Death~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()
+  ztable()%>%print()
 
 tbl_data%>%
   filter(Outcome_Weaning_success!='전원')%>%
@@ -47,33 +48,22 @@ tbl_data%>%
   mutate(Outcome_Weaning_success=fct_relevel(if_else(Outcome_Weaning_success==1,'Weaned','Death'),'Weaned'))%>%
   mytable(Outcome_Weaning_success~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()
+  ztable()%>%print()
 
-
-library(stats)
-
-#multivariable Logistic regression
-tbl_data%>%
-  filter(Outcome_Weaning_success!='전원')->df
-res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+Insertion_ECMO_type+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
-out<-step(res,direction="backward",trace=T)
-summary(out)
-anova(out,test='Chisq')
-res
 
 tbl_data%>%
   #mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))%>%
   #mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
   mytable(Cx_during_ECMO~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()
+  ztable()%>%print()
 
 tbl_data%>%
   #mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))%>%
   #mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
   mytable(Blood_Cx~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()
+  ztable()%>%print()
 
 
 r_Cx%>%

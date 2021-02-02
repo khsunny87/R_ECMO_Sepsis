@@ -1,0 +1,46 @@
+---
+title: "ECMO_Sepsis_HTML"
+author: "Sun Kim"
+date: '2021 2 2 '
+output: html_document
+---
+
+```{r global_options, echo = FALSE, include = FALSE,warning = FALSE, message = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = F,message=F,comment=NA)
+Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
+```
+
+# Initialize
+```{r results = 'asis'}
+source("R_script/01_Load_Excel.R")
+source("R_script/02_Inclusion.R")
+source("R_script/03_Culture_Load.R")
+source("R_script/04_Load_Culture2.R")
+source("R_script/05_Grouping.R")
+```
+
+# Tables
+
+```{r results = 'asis'}
+source("R_script/06_Make_Table.R")
+```
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
