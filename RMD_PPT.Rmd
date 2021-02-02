@@ -1,0 +1,25 @@
+---
+title: "RMD_PPT"
+author: "Sun Kim"
+date: '2021 2 2 '
+output: powerpoint_presentation
+---
+
+```{r global_options, echo = FALSE, include = FALSE,warning = FALSE, message = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = F,message=F,comment=NA)
+Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
+```
+
+```{r results = 'asis'}
+source("R_script/01_Load_Excel.R")
+source("R_script/02_Inclusion.R")
+source("R_script/03_Culture_Load.R")
+source("R_script/04_Load_Culture2.R")
+source("R_script/05_Grouping.R")
+```
+
+# Tables
+```{r results = 'asis'}
+source("R_script/06_Make_Table.R")
+```
