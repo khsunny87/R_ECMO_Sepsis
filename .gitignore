@@ -41,11 +41,11 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-<<<<<<< HEAD
+
 # RMD output
 *.pptx
 *.html
-=======
+
 # test file
 test_*.*
 
