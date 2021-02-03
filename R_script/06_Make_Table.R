@@ -20,9 +20,10 @@ Organism_list<-function(culture_df,length=-1){
 }
 
 group_name<-c('No sepsis','Sepsis before ECMO','Sepsis during ECMO')
-options(ztable.type='html')
-#options(ztable.type='viewer')
+#options(ztable.type='html')
+options(ztable.type='viewer')
 
+#Labelling
 label_data<-read_csv('Input/label.csv')
 labels<-names(anal_data)
 names(labels)<-labels

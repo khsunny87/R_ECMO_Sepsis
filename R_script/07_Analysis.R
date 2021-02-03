@@ -41,7 +41,8 @@ summary(coxph(Surv(tstart,tstop,death)~tdBSI,data=tddf))%>%print()
 
 tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
 fit<-survfit(TS~tdBSI,data=tddf)
-ggsurvplot(fit)%>%print()
+ggsurvplot(fit,legend.title="",legend.labs=c('No BSI','BSI'))%>%print()
+
 
 # END
 

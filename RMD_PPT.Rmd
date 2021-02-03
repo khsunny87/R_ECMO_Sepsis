@@ -21,5 +21,75 @@ source("R_script/05_Grouping.R")
 
 # Tables
 ```{r results = 'asis'}
-source("R_script/06_Make_Table.R")
+library(sjlabelled)
+library(forcats)
+library(kableExtra)
+library(readr)
+
+#source("R_script/06_Make_Table.R")
+#Labelling
+group_name<-c('No sepsis','Sepsis before ECMO','Sepsis during ECMO')
+
+label_data<-read_csv('Input/label.csv')
+labels<-names(anal_data)
+names(labels)<-labels
+labels[label_data$var_name]<-label_data$label
+anal_data<-set_label(anal_data,labels)
+
+tbl_data<-anal_data%>%
+  select(-Basic_Hospital_ID,-Basic_이름,-Insertion_ECMO_시술일,-Basic_Primary_Dx,-Insertion_원내삽입,-Insertion_Success_ECMO_implantation,-Outcome_ECMO_제거일,-Outcome_Death_date,-Outcome_Discharge_date,-Outcome_Last_FU_date,-Complication_Sepsis)
+tbl_data$Outcome_Weaning_success<-set_labels(tbl_data$Outcome_Weaning_success,labels=c('0'="No",'1'="Yes",'전원'="Transfer"))
+tbl_data$Outcome_Survival_discharge<-set_labels(tbl_data$Outcome_Survival_discharge,labels=c("No","Yes","Hopeless discharge"))
+
+tbl_data%>%
+  mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))%>%
+  mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
+  mytable(Outcome_Death~.,data=.,show.total=T)%>%
+  compress(add.label=F)%>%
+  mytable2df()%>%knitr::kable(format='pipe',row.names=F)
+
 ```
+
+# Tables
+```{r}
+tbl_data%>%
+  filter(Outcome_Weaning_success!='전원')%>%
+  #mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))%>%
+  #mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
+  mutate(Outcome_Weaning_success=fct_relevel(if_else(Outcome_Weaning_success==1,'Weaned','Death'),'Weaned'))%>%
+  mytable(Outcome_Weaning_success~.,data=.,show.total=T)%>%
+  compress(add.label=F)%>%
+    mytable2df()%>%knitr::kable(format='pipe',row.names=F)
+```
+
+# Time-dependent Cox regression
+```{r}
+library(survival)
+library(survminer)
+init_BSI<-r_Cx2%>%
+  filter(Cx_result,Cate_sp=='BSI')%>%
+  left_join(.,anal_data%>%select(Basic_Hospital_ID,Insertion_ECMO_시술일,Outcome_ECMO_제거일),by=c('ID'='Basic_Hospital_ID'))%>%
+  filter(lab_performed_time<=Outcome_ECMO_제거일)%>%
+  mutate(interval=(lab_performed_time-Insertion_ECMO_시술일)/ddays(1))%>%
+  filter(interval>=0)%>%
+  group_by(ID)%>%
+  summarise(interval=min(interval))
+
+anal_data%>%
+  mutate(surv_duration=pmax((Outcome_Last_FU_date-Insertion_ECMO_시술일)/ddays(1),ECMO_duration))%>%
+  select(Basic_Hospital_ID,Outcome_Death,Outcome_Weaning_success,ECMO_duration,surv_duration)%>%
+  left_join(.,init_BSI,by=c('Basic_Hospital_ID'='ID'))%>%
+  mutate(BSI=!is.na(interval))->cut_data #
+cut_data$id=(1:nrow(cut_data))
+tddf<-tmerge(cut_data,cut_data,id=id,
+             death=event(surv_duration,Outcome_Death),
+             tdBSI=tdc(interval)
+)
+
+summary(coxph(Surv(tstart,tstop,death)~tdBSI,data=tddf))%>%print()
+
+tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
+fit<-survfit(TS~tdBSI,data=tddf)
+ggsurvplot(fit,legend.title="",legend.labs=c('No BSI','BSI'))
+```
+
