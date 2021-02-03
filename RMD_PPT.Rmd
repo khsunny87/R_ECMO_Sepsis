@@ -62,6 +62,13 @@ tbl_data%>%
     mytable2df()%>%knitr::kable(format='pipe',row.names=F)
 ```
 
+# Culture tables
+
+# Primary Outcomes - MV logistics
+
+# Error bar plot
+
+
 # Time-dependent Cox regression
 ```{r}
 library(survival)
