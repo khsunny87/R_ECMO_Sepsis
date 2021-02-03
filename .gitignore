@@ -43,8 +43,8 @@ vignettes/*.pdf
 
 
 # RMD output
-*.pptx
-*.html
+RMD_PPT.pptx
+RMD_HTML.html
 
 # test file
 test_*.*
