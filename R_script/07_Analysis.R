@@ -10,9 +10,14 @@ tbl_data%>%
 res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+Insertion_ECMO_type+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
 out<-step(res,direction="backward",trace=T)
 summary(out)%>%print()
+exp(coef(out)) # Odds Ratio
+exp(confint(out)) #신뢰구간
+
 anova(out,test='Chisq')%>%print()
 res%>%print()
 
+exp(coef(out))
+exp(confint(out))
 
 # 2. Survival - Survival vs. Death
 #    time-dependent Cox
