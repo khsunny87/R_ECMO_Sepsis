@@ -42,7 +42,7 @@ init_BSI<-r_Cx2%>%
 
 anal_data%>%
   mutate(surv_duration=pmax((Outcome_Last_FU_date-Insertion_ECMO_시술일)/ddays(1),ECMO_duration))%>%
-  select(Basic_Hospital_ID,Outcome_Death,Outcome_Weaning_success,ECMO_duration,surv_duration)%>%
+  select(Basic_Hospital_ID,Outcome_Death,Outcome_Weaning_success,ECMO_duration,surv_duration,PMH_HTN)%>%
   left_join(.,init_BSI,by=c('Basic_Hospital_ID'='ID'))%>%
   mutate(BSI=!is.na(interval))->cut_data #
 cut_data$id=(1:nrow(cut_data))
@@ -52,6 +52,8 @@ tddf<-tmerge(cut_data,cut_data,id=id,
 )
 
 summary(coxph(Surv(tstart,tstop,death)~tdBSI,data=tddf))%>%print()
+summary(coxph(Surv(tstart,tstop,death)~tdBSI+PMH_HTN,data=tddf))%>%print()
+
 
 tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
 fit<-survfit(TS~tdBSI,data=tddf)
