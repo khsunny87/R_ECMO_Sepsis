@@ -8,11 +8,6 @@ library(stats)
 #multivariable Logistic regression
 
 
-?fct_lump
-dummy_VV
-dummy_Others
-
-
 tbl_data%>%
   filter(Outcome_Weaning_success!='전원')%>%
   mutate(dummy_VV=(Insertion_ECMO_type=='VV-ECMO'),dummy_Others=!(Insertion_ECMO_type %in% c('VA-ECMO','VV-ECMO')))->df
