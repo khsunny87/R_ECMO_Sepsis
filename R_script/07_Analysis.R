@@ -1,17 +1,31 @@
 library(survival)
 library(survminer)
+library(forcats)
 
 # 1. MV logistic - weaned vs. death
 library(stats)
 
 #multivariable Logistic regression
+
+
+?fct_lump
+dummy_VV
+dummy_Others
+
+
 tbl_data%>%
-  filter(Outcome_Weaning_success!='전원')->df
-res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+Insertion_ECMO_type+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
+  filter(Outcome_Weaning_success!='전원')%>%
+  mutate(dummy_VV=(Insertion_ECMO_type=='VV-ECMO'),dummy_Others=!(Insertion_ECMO_type %in% c('VA-ECMO','VV-ECMO')))->df
+
+#res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+Insertion_ECMO_type+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
+res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+dummy_VV+dummy_Others+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
+
 out<-step(res,direction="backward",trace=T)
+
 summary(out)%>%print()
-exp(coef(out)) # Odds Ratio
-exp(confint(out)) #신뢰구간
+extractOR(out)
+ORplot(out)
+out
 
 anova(out,test='Chisq')%>%print()
 res%>%print()
