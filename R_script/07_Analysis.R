@@ -8,7 +8,7 @@ library(stats)
 #multivariable Logistic regression
 
 
-tbl_data%>%
+anal_data%>%
   filter(Outcome_Weaning_success!='전원')%>%
   mutate(dummy_VV=(Insertion_ECMO_type=='VV-ECMO'),dummy_Others=!(Insertion_ECMO_type %in% c('VA-ECMO','VV-ECMO')))->df
 
@@ -59,6 +59,37 @@ tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
 fit<-survfit(TS~tdBSI,data=tddf)
 ggsurvplot(fit,legend.title="",legend.labs=c('No BSI','BSI'))%>%print()
 
+
+#MV Cox analysis
+cox_trim<-anal_data%>%
+  mutate(surv_duration=pmax((Outcome_Last_FU_date-Insertion_ECMO_시술일)/ddays(1),ECMO_duration))%>%
+  mutate(TS=Surv(surv_duration/30,Outcome_Death))%>%
+  select(TS,ECPR_ECPR,starts_with('Basic_'),starts_with('Insertion_'),starts_with('PMH_'),starts_with('Pre_Lab_'),starts_with('Lactate_'),starts_with('ECMO_'),starts_with('Complication_'))%>%
+  mutate(dummy_VV=(Insertion_ECMO_type=='VV-ECMO'),dummy_Others=!(Insertion_ECMO_type %in% c('VA-ECMO','VV-ECMO')))%>%
+  select(-Basic_Hospital_ID,-Basic_Primary_Dx,-Basic_이름,-Insertion_ECMO_시술일,-Insertion_Success_ECMO_implantation,-Insertion_ECMO_type)
+
+
+#cox_trim$
+
+View(cox_trim)
+View(anal_data)
+uv_out=mycph(TS~.,data=cox_trim)
+HRplot(uv_out,type=2,show.CI=TRUE)
+
+uv_out
+
+
+#candi2<-c("Info_Male","Info_Age","Cate_F","PMH_preHTN","PMH_smk","PMH_Marfan","Op_Root","Op_Total","Comb_CABG","CPB_CPB","CPB_TCA","DO_interval10")
+#candi_label<-c('Male','Age','MP','HTN','Smoking','Marfan','Root procedure','Total Arch','Combined CABG','CPB time','TCA time','Diagnosis to surgery')
+
+mv_trim<-cox_trim%>%
+  na.omit()
+
+mv_out<-coxph(TS~.,data = mv_trim)
+res<-step(mv_out,direction='backward') # MV 
+
+res
+HRplot(res,type=2,show.CI=TRUE)
 
 # END
 
