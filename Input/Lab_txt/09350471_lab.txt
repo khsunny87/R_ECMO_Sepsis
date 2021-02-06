@@ -1,0 +1,58 @@
+검사결과 시계열 조회,...2,...3,...4,...5,...6,...7,...8,...9,...10,...11
+출력일시 : 2020-11-08 16:27:18,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"☞ 환자번호: 09350471, 환자명: 조정희, 성별/나이: F/61세, 기간(접수일):【2017-08-09 ~ 2017-09-09】",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+검사코드,검사명,단위,2017-08-31 12:25,2017-08-31 12:30,2017-08-31 13:05,2017-08-31 15:22,2017-09-08 13:58,2017-09-08 15:54,2017-09-08 19:52,2017-09-08 19:55
+BL2011,"WBC Count, Blood",x10³/μL,NA,5.80,NA,NA,NA,NA,NA,NA
+BL2012,"RBC Count, Blood",x100³/μL,NA,3.92,NA,NA,NA,NA,NA,NA
+BL2013,"Hemoglobin, Blood",g/dL,NA,11.6,NA,NA,NA,NA,NA,NA
+BL2014,"Hematocrit, Blood",%,NA,36.7,NA,NA,NA,NA,NA,NA
+BL201401,MCV (Mean Corpuscular Volume),fL,NA,93.6,NA,NA,NA,NA,NA,NA
+BL201402,MCH (Mean Corpuscular Hemoglobin),pg,NA,29.6,NA,NA,NA,NA,NA,NA
+BL201403,MCHC (Mean Corpuscular Hemoglobin Concentration),g/dL,NA,▼31.6,NA,NA,NA,NA,NA,NA
+BL2016,"Platelet Count, Blood",x10³/μL,NA,150,NA,NA,NA,NA,NA,NA
+BL201801,Blast,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201802,Promyelocyte,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201803,Myelocyte,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201804,Metamyelocyte,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201805,Band neutrophil,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201806,Segmented neutrophil,%,NA,62.4,NA,NA,NA,NA,NA,NA
+BL201807,Eosinophil,%,NA,4.0,NA,NA,NA,NA,NA,NA
+BL201808,Basophil,%,NA,1.2,NA,NA,NA,NA,NA,NA
+BL201809,Lymphocyte,%,NA,26.7,NA,NA,NA,NA,NA,NA
+BL201810,Monocyte,%,NA,5.7,NA,NA,NA,NA,NA,NA
+BL201811,Atypical Lymphocyte,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201812,Immature cell,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201813,Plasma cell,%,NA,0,NA,NA,NA,NA,NA,NA
+BL201814,Nucleated RBC,/100WBC,NA,0,NA,NA,NA,NA,NA,NA
+BL201815,ANC (Absolute Neutrophil Count),x10³/μL,NA,3.62,NA,NA,NA,NA,NA,NA
+BL201816,ALC (Absolute Lymphocyte Count),x10³/μL,NA,1.55,NA,NA,NA,NA,NA,NA
+BL201818,Abnormal Lymphoid cell,%,NA,0,NA,NA,NA,NA,NA,NA
+BL2021,ESR (Erythrocyte Sedimentation Rate),mm/hr,NA,14,NA,NA,NA,NA,NA,NA
+BL3111,"Protein, Total",g/㎗,NA,6.7,NA,NA,NA,NA,NA,NA
+BL3112,Albumin,g/㎗,NA,4.4,NA,NA,NA,NA,NA,NA
+BL311201,Globulin,g/㎗,NA,2.2,NA,NA,NA,NA,NA,NA
+BL311202,A/G ratio,NA,NA,2.0,NA,NA,NA,NA,NA,NA
+BL3113,Cholesterol,㎎/㎗,NA,235,NA,NA,NA,NA,NA,NA
+BL3114,"Bilirubin, Total",㎎/㎗,NA,0.6,NA,NA,NA,NA,NA,NA
+BL3115,AST,U/ℓ,NA,28,NA,NA,NA,NA,NA,NA
+BL3116,ALT,U/ℓ,NA,25,NA,NA,NA,NA,NA,NA
+BL3117,ALP,U/ℓ,NA,67,NA,NA,NA,NA,NA,NA
+BL3118,"Glucose, Fasting",㎎/㎗,NA,▼68,NA,NA,NA,NA,NA,NA
+BL3119,BUN,㎎/㎗,NA,▲40.1,NA,NA,NA,NA,NA,NA
+BL3120,Creatinine,㎎/㎗,NA,▲7.43,NA,NA,NA,NA,NA,NA
+BL312001,BUN & Creatinine ratio,NA,NA,▼5.0,NA,NA,NA,NA,NA,NA
+BL312002,Estimated GFR,mL/min/,NA,▼5.6,NA,NA,NA,NA,NA,NA
+BL3121,Uric Acid,㎎/㎗,NA,5.0,NA,NA,NA,NA,NA,NA
+BL3122,Ca,㎎/㎗,NA,9.1,NA,NA,NA,NA,NA,NA
+BL3123,P,㎎/㎗,NA,3.6,NA,NA,NA,NA,NA,NA
+BL3140,"CRP, Quantitative (High Sensitivity)",㎎/㎗,NA,▲0.32,NA,NA,NA,NA,NA,NA
+BL319102,"pCO2, venous",mmHg,NA,NA,NA,NA,NA,NA,▲113.7,▲111.8
+BL319103,"pO2, venous",mmHg,NA,NA,NA,NA,NA,NA,▼9.1,▼9.8
+BL502903,"ANCA,Quantative",NA,NA,Text결과,NA,NA,NA,NA,NA,NA
+BS2102,ECG Routine(Post),NA,NA,NA,NA,NA,Text결과,NA,NA,NA
+BS2230,Advanced echo (정밀echo),NA,NA,NA,NA,NA,NA,Text결과,NA,NA
+BS3101,Spirometry and F/V Curve,NA,Text결과,NA,NA,NA,NA,NA,NA,NA
+BS3111,Diffusing Capacity,NA,Text결과,NA,NA,NA,NA,NA,NA,NA
+BS3115,Lung Volume by Plethysmography,NA,Text결과,NA,NA,NA,NA,NA,NA,NA
+RC1210,"CHEST CT, D.I.L.D (NON-CONTRAST)",NA,NA,NA,NA,Text결과,NA,NA,NA,NA
+RG010P,CHEST PA,NA,NA,NA,Text결과,NA,NA,NA,NA,NA
