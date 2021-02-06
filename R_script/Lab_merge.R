@@ -6,7 +6,6 @@ library(stringr)
 path<-'Input/Lab_txt/'
 flist<-dir(path)
 
-
 Load_Labfile<-function(path,fname){
 
 raw_txt<-read_csv(paste0(path,fname))
@@ -26,3 +25,7 @@ return(as.data.frame(rendered))
 merged<-lapply(flist,function(x) Load_Labfile(path=path,fname=x))%>%
   do.call(rbind,.)
 View(merged)
+
+write_csv(merged,'Input/lab_merge.txt')
+
+
