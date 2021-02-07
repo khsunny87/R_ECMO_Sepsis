@@ -37,9 +37,12 @@ BSI_lab<-lab_data%>%
 
 View(BSI_lab)
 BSI_lab%>%
-  mytable(Outcome_Weaning_success~.,data=.)
+  mytable(Outcome_Weaning_success~.,data=.,method=3)
+?mytable
 BSI_lab%>%
-  mytable(Outcome_Death~.,data=.)
+  mytable(Outcome_Death~.,data=.,method=3)
+
+biomarker_code
 anal_data%>%
   filter(Blood_Cx)%>%select(Basic_Hospital_ID,Outcome_Weaning_success,Outcome_Death)
 
