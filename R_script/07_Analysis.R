@@ -34,7 +34,7 @@ exp(confint(out))
 init_BSI<-r_Cx2%>%
   filter(Cx_result,Cate_sp=='BSI')%>%
   left_join(.,anal_data%>%select(Basic_Hospital_ID,Insertion_ECMO_시술일,Outcome_ECMO_제거일),by=c('ID'='Basic_Hospital_ID'))%>%
-  filter(lab_performed_time<=Outcome_ECMO_제거일)%>%
+  filter(lab_performed_time<=Outcome_ECMO_제거일+ddays(1))%>%
   mutate(interval=(lab_performed_time-Insertion_ECMO_시술일)/ddays(1))%>%
   filter(interval>=0)%>%
   group_by(ID)%>%
