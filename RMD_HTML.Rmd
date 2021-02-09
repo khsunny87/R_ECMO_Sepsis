@@ -22,10 +22,20 @@ myt_output='PPT'
 # Tables
 
 ```{r results = 'asis'}
-
 source("R_script/06_Make_Table.R")
+table1%>%print_mytable()
+table2%>%print_mytable()
+table3%>%print_mytable()
+table4%>%print_mytable()
+table5
 ```
 # Analysis
 ```{r results = 'asis'}
 source("R_script/07_Analysis.R")
+extractOR(MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
+ORplot(MV_LR_res,type=2,show.CI = T)
+Surv_plot
+UV_COX_res%>%knitr::kable(format = 'pipe')%>%print()
+HRplot(UV_COX_res,type=2,show.CI=TRUE)
+
 ```

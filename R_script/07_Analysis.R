@@ -15,11 +15,10 @@ anal_data%>%
 #res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+Insertion_ECMO_type+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
 res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+dummy_VV+dummy_Others+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=df)
 
-out<-step(res,direction="backward",trace=T)
+MV_LR_res<-step(res,direction="backward",trace=T)
 
-#summary(out)%>%print()
-extractOR(out)%>%knitr::kable('pipe')%>%print()
-ORplot(out)%>%print()
+
+
 
 #anova(out,test='Chisq')%>%print()
 #res%>%print()
@@ -55,7 +54,7 @@ tddf<-tmerge(cut_data,cut_data,id=id,
 
 tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
 fit<-survfit(TS~tdBSI,data=tddf)
-ggsurvplot(fit,legend.title="",legend.labs=c('No BSI','BSI'))%>%print()
+Surv_plot<-ggsurvplot(fit,legend.title="",legend.labs=c('No BSI','BSI'))
 
 
 #MV Cox analysis
@@ -70,8 +69,8 @@ cox_trim<-anal_data%>%
 #cox_trim$
 
 
-uv_out=mycph(TS~.,data=cox_trim)
-HRplot(uv_out,type=2,show.CI=TRUE)%>%print()
+UV_COX_res=mycph(TS~.,data=cox_trim)
+
 
 
 
