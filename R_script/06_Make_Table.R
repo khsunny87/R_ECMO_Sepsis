@@ -20,8 +20,7 @@ Organism_list<-function(culture_df,length=-1){
 }
 
 group_name<-c('No sepsis','Sepsis before ECMO','Sepsis during ECMO')
-#options(ztable.type='html')
-options(ztable.type='viewer')
+
 
 #Labelling
 label_data<-read_csv('Input/label.csv')
@@ -40,7 +39,7 @@ tbl_data%>%
   mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
   mytable(Outcome_Death~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()%>%print()
+  print_mytable()
 
 tbl_data%>%
   filter(Outcome_Weaning_success!='전원')%>%
@@ -49,7 +48,7 @@ tbl_data%>%
   mutate(Outcome_Weaning_success=fct_relevel(if_else(Outcome_Weaning_success==1,'Weaned','Death'),'Weaned'))%>%
   mytable(Outcome_Weaning_success~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()%>%print()
+  print_mytable()
 
 
 tbl_data%>%
@@ -57,14 +56,14 @@ tbl_data%>%
   #mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
   mytable(Cx_during_ECMO~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()%>%print()
+  print_mytable()
 
 tbl_data%>%
   #mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))%>%
   #mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))%>%
   mytable(Blood_Cx~.,data=.,show.total=T)%>%
   compress(add.label=F)%>%
-  ztable()%>%print()
+  print_mytable()
 
 
 r_Cx%>%
@@ -96,7 +95,7 @@ header<-rep(2,length(Cate_label))
 names(header)<-paste(Cate_label,suffix)
 Org_tbl%>%kable()%>%
   add_header_above(header)%>%
-  kable_styling()
+  kable_styling()%>%print()
 
 
 

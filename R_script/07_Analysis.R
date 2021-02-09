@@ -17,16 +17,14 @@ res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion
 
 out<-step(res,direction="backward",trace=T)
 
-summary(out)%>%print()
-extractOR(out)
-ORplot(out)
-out
+#summary(out)%>%print()
+extractOR(out)%>%knitr::kable('pipe')%>%print()
+ORplot(out)%>%print()
 
-anova(out,test='Chisq')%>%print()
-res%>%print()
+#anova(out,test='Chisq')%>%print()
+#res%>%print()
 
-exp(coef(out))
-exp(confint(out))
+
 
 # 2. Survival - Survival vs. Death
 #    time-dependent Cox
@@ -51,8 +49,8 @@ tddf<-tmerge(cut_data,cut_data,id=id,
              tdBSI=tdc(interval)
 )
 
-summary(coxph(Surv(tstart,tstop,death)~tdBSI,data=tddf))%>%print()
-summary(coxph(Surv(tstart,tstop,death)~tdBSI+PMH_HTN,data=tddf))%>%print()
+#summary(coxph(Surv(tstart,tstop,death)~tdBSI,data=tddf))%>%print()
+#summary(coxph(Surv(tstart,tstop,death)~tdBSI+PMH_HTN,data=tddf))%>%print()
 
 
 tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
@@ -71,25 +69,24 @@ cox_trim<-anal_data%>%
 
 #cox_trim$
 
-View(cox_trim)
-View(anal_data)
-uv_out=mycph(TS~.,data=cox_trim)
-HRplot(uv_out,type=2,show.CI=TRUE)
 
-uv_out
+uv_out=mycph(TS~.,data=cox_trim)
+HRplot(uv_out,type=2,show.CI=TRUE)%>%print()
+
 
 
 #candi2<-c("Info_Male","Info_Age","Cate_F","PMH_preHTN","PMH_smk","PMH_Marfan","Op_Root","Op_Total","Comb_CABG","CPB_CPB","CPB_TCA","DO_interval10")
 #candi_label<-c('Male','Age','MP','HTN','Smoking','Marfan','Root procedure','Total Arch','Combined CABG','CPB time','TCA time','Diagnosis to surgery')
 
-mv_trim<-cox_trim%>%
-  na.omit()
+#mv_trim<-cox_trim%>%
+#  na.omit()
 
-mv_out<-coxph(TS~.,data = mv_trim)
-res<-step(mv_out,direction='backward') # MV 
+#mv_out<-coxph(TS~.,data = mv_trim)
+#res<-step(mv_out,direction='backward') # MV 
 
-res
-HRplot(res,type=2,show.CI=TRUE)
+
+#HRplot(res,type=2,show.CI=TRUE)%>%print()
 
 # END
+
 
