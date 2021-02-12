@@ -16,7 +16,7 @@ Sys.setlocale(category = "LC_CTYPE", locale = "ko_KR.UTF-8")
 ```{r results = 'asis'}
 source("R_script/00_Initialize.R")
 source("R_script/99_Output.R")
-myt_output='PPT'
+myt_output='HTML'
 ```
 
 # Tables

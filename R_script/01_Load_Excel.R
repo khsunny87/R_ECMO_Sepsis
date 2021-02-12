@@ -49,5 +49,10 @@ raw_data$Outcome_Last_FU_date<<-if_else(is.na(tmp_data$Death),tmp_data$Outcome_L
 
 }
 
-
 Update_survival()
+
+BM_lab<-read_csv('Input/BM_lab.txt',col_types=cols(ID=col_character()))
+
+raw_data<-left_join(raw_data,BM_lab,by=c('Basic_Hospital_ID'='ID'))
+
+

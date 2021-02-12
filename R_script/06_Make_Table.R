@@ -49,10 +49,12 @@ table2<-tbl_data%>% # Survivors vs. Nonsurvivors
 
 
 table3<-tbl_data%>% # Culture during ECMO
+  mutate(Cx_during_ECMO=fct_relevel(if_else(Cx_during_ECMO==T,'Culture(+)','Culture(-)'),'Culture(+)'))%>%
   mytable(Cx_during_ECMO~.,data=.,show.total=T,catMethod=0)%>%
   compress(add.label=F)
 
 table4<-tbl_data%>% # Blood culture during ECMO
+  mutate(Blood_Cx=fct_relevel(if_else(Blood_Cx==T,'BSI(+)','BSI(-)'),'BSI(+)'))%>%
   mytable(Blood_Cx~.,data=.,show.total=T,catMethod=0)%>%
   compress(add.label=F)
 

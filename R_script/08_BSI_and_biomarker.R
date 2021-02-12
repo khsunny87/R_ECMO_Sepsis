@@ -1,6 +1,3 @@
-anal_data%>%
-  filter(Blood_Cx)
-
 
 library(stringr)
 lab_data<-read_csv('Input/lab_merge.txt')
@@ -9,7 +6,6 @@ biomarker_code<-c('WBC Count, Blood'='BL2011',
                   'CRP, Quantitative (High Sensitivity)'='BL3140',
                   'Procalcitonin, quantitative' ='BL5044')
 
-biomarker_code
 
 
 BSI2<-r_Cx2%>%
@@ -22,7 +18,6 @@ BSI2<-r_Cx2%>%
   summarise(interval=min(interval),lab_performed_time=min(lab_performed_time))
 
 
-
 BSI_lab<-lab_data%>%
   filter(검사코드 %in% biomarker_code,ID %in% BSI2$ID)%>%
   mutate(values=as.numeric(sub('^[^0-9]','',values)))%>%
@@ -32,30 +27,31 @@ BSI_lab<-lab_data%>%
   filter(검사시간==max(검사시간))%>%select(-검사명,-단위,-검사시간)%>%
   pivot_wider(names_from = 검사코드,values_from=values)%>%
   right_join(.,anal_data%>%
-               filter(Blood_Cx)%>%select(Basic_Hospital_ID,Outcome_Weaning_success,Outcome_Death),by=c('ID'='Basic_Hospital_ID'))
+               filter(Blood_Cx)%>%select(Basic_Hospital_ID,Outcome_Weaning_success,Outcome_Death),by=c('ID'='Basic_Hospital_ID'))%>%
+  ungroup()%>%
+  select(-ID,-lab_performed_time)%>%
+  mutate(Outcome_Weaning_success=fct_relevel(if_else(Outcome_Weaning_success==1,'Weaned','Death'),'Weaned'))%>%
+  mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))
   
 
-View(BSI_lab)
+#BSI_lab%>%View()
+
+
+
+LabName<-function(code){
+  if(sum(biomarker_code==code)==0)
+    return(code)
+  return(names(biomarker_code[biomarker_code==code]))
+}
+
+BSI_lab<-set_label(BSI_lab,sapply(names(BSI_lab),LabName))
+
+#BSI culture시 biomarker
 BSI_lab%>%
-  mytable(Outcome_Weaning_success~.,data=.,method=3)
-?mytable
+  mytable(Outcome_Weaning_success~.,data=.)
 BSI_lab%>%
-  mytable(Outcome_Death~.,data=.,method=3)
-
-biomarker_code
-anal_data%>%
-  filter(Blood_Cx)%>%select(Basic_Hospital_ID,Outcome_Weaning_success,Outcome_Death)
+  mytable(Outcome_Death~.,data=.)
 
 
-View(anal_data%>%
-  filter(Basic_Hospital_ID=='03084381')%>%
-  select(Basic_Hospital_ID,Insertion_ECMO_시술일,Outcome_ECMO_제거일))
 
-View(r_Cx2%>%filter(ID=='03084381',Cx_result))
 
-init_BSI$ID
-anal_data%>%
-  filter(Blood_Cx)%>%
-  filter(!(Basic_Hospital_ID %in% init_BSI$ID))%>%
-  View()
-  str()
