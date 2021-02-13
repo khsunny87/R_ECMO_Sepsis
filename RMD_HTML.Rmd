@@ -39,3 +39,12 @@ UV_COX_res%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(UV_COX_res,type=2,show.CI=TRUE)
 
 ```
+
+
+# Biomarker study
+```{r results = 'asis'}
+source("R_script/08_BSI_and_biomarker.R")
+table6%>%print_mytable()
+table7%>%print_mytable()
+```
+
