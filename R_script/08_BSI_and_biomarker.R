@@ -37,12 +37,30 @@ biomarker_code<-c('WBC Count, Blood'='BL2011',
 
 #write_csv(BSI_BM,'Input/BSI_BM.txt')
 
+
+#raw_BT<-read_csv('Input/BT_no_pass.txt',col_types=cols(`환자번호`=col_character()))
+
+#raw_BT%>%
+#  select(환자번호,체온측정일시,체온)%>%
+#  left_join(.,BSI2%>%ungroup()%>%select(ID,lab_performed_time),by=c('환자번호'='ID'))%>%
+#  filter(!is.na(lab_performed_time))%>%
+#  filter(체온측정일시>=lab_performed_time-ddays(1),체온측정일시<=lab_performed_time+ddays(1))%>%
+#  group_by(환자번호,lab_performed_time)%>%
+#  summarise(hBT=max(체온),hBT_time=체온측정일시[which.max(체온)])%>%
+#  write_csv(.,'Input/BSI_BT.txt')
+
+
+
 BSI_BM<-read_csv('Input/BSI_BM.txt',col_types=cols(ID=col_character()))
+BSI_BT<-read_csv('Input/BSI_BT.txt',col_types=cols(`환자번호`=col_character()))
+
+  
 
 BSI_lab<-BSI_BM%>%
   right_join(.,anal_data%>%
                filter(Blood_Cx)%>%select(Basic_Hospital_ID,Outcome_Weaning_success,Outcome_Death),by=c('ID'='Basic_Hospital_ID'))%>%
   ungroup()%>%
+  left_join(.,  BSI_BT%>%select(환자번호,hBT),by=c('ID'='환자번호'))%>%
   select(-ID,-lab_performed_time)%>%
   mutate(Outcome_Weaning_success=fct_relevel(if_else(Outcome_Weaning_success==1,'Weaned','Death'),'Weaned'))%>%
   mutate(Outcome_Death=fct_relevel(if_else(Outcome_Death==0,'Survivors','Nonsurvivors'),'Survivors'))
