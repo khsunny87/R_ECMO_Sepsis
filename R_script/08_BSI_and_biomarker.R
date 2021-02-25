@@ -77,6 +77,9 @@ LabName<-function(code){
 }
 
 BSI_lab<-set_label(BSI_lab,sapply(names(BSI_lab),LabName))
+attr(BSI_lab$hBT,'label')<-'BT'
+
+
 
 #BSI culture시 biomarker
 table6<-BSI_lab%>%
