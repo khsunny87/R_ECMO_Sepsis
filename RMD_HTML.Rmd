@@ -37,7 +37,8 @@ ORplot(MV_LR_res,type=2,show.CI = T)
 Surv_plot
 UV_COX_res%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(UV_COX_res,type=2,show.CI=TRUE)
-
+extractHR(MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
+HRplot(MV_COX_res)
 ```
 
 
