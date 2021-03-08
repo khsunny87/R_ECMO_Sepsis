@@ -15,9 +15,10 @@ raw_data%>%
   filter(Basic_이름!='윤재홍' & Basic_이름!='박융석')%>%
   filter(`Insertion_ECMO_시술일`<ymd("2020-7-1"))%>%#count() #852
   filter(Basic_나이>=18)%>%#count() #765
-  filter(map_lgl(.$Basic_이름,Check_Name))->inc_data#count() #709
+  filter(map_lgl(.$Basic_이름,Check_Name))%>% #709
+  filter(Outcome_Weaning_success!='전원')->inc_data#count() #705
 
- 
+
   #filter(Insertion_원내삽입)%>%
   
 
