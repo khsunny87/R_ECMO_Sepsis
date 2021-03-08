@@ -49,6 +49,11 @@ biomarker_code<-c('WBC Count, Blood'='BL2011',
 #  summarise(hBT=max(체온),hBT_time=체온측정일시[which.max(체온)])%>%
 #  write_csv(.,'Input/BSI_BT.txt')
 
+BSI_IR<-nrow(init_BSI)/ # n of BSI
+  (
+    anal_data%>%filter(!(Basic_Hospital_ID%in%init_BSI$ID))%>%.$ECMO_duration%>%sum()+ # n*days of non_infected
+    sum(init_BSI$interval) # n*days of infected until infection
+    )*1000
 
 
 BSI_BM<-read_csv('Input/BSI_BM.txt',col_types=cols(ID=col_character()))
@@ -88,5 +93,4 @@ table7<-BSI_lab%>%
   mytable(Outcome_Death~.,data=.,show.total=T)
 
 
-
-
+  
