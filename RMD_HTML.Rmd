@@ -18,6 +18,10 @@ source("R_script/00_Initialize.R")
 source("R_script/99_Output.R")
 myt_output='HTML'
 ```
+# Inclusion
+```{r}
+inc_table%>%knitr::kable(format = 'pipe')%>%print()
+```
 
 # Tables
 
