@@ -83,9 +83,9 @@ attr(BSI_lab$hBT,'label')<-'BT'
 
 #BSI culture시 biomarker
 table6<-BSI_lab%>%
-  mytable(Outcome_Weaning_success~.,data=.)
+  mytable(Outcome_Weaning_success~.,data=.,show.total=T)
 table7<-BSI_lab%>%
-  mytable(Outcome_Death~.,data=.)
+  mytable(Outcome_Death~.,data=.,show.total=T)
 
 
 
