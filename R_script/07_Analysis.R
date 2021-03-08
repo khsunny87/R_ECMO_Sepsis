@@ -81,8 +81,8 @@ cox_trim<-tddf%>%
 
 UV_COX_res=mycph(TS~.,data=cox_trim)
 
-UV_COX_res%>%
-  filter(p<0.05)%>%row.names()
+#UV_COX_res%>%
+#  filter(p<0.05)%>%row.names()
 
 MV_COX_candi<-tribble(
           ~col_name,~label,
