@@ -81,20 +81,20 @@ cox_trim<-tddf%>%
 
 UV_COX_res=mycph(TS~.,data=cox_trim)
 
-#UV_COX_res%>%
-#  filter(p<0.05)%>%row.names()
+UV_COX_res%>%
+  filter(p<0.05)%>%row.names()
 
 MV_COX_candi<-tribble(
           ~col_name,~label,
           'tdBSI','BSI',
           "ECPR_ECPR", 'ECPR',
           "Basic_나이", 'Age',
-          "Basic_키", 'Height', #0.2
+        #  "Basic_키", 'Height', #0.2
         #  "Insertion_삽입이유", 'ECMO Indication',
-           "Insertion_Mechanical_ventilation",'Mechanical ventilation', #0.2
+        #   "Insertion_Mechanical_ventilation",'Mechanical ventilation', #0.2
           "PMH_Malignancy",'Malignancy',
           "PMH_HTN",'HTN',
-          "PMH_Dyslipidemia",'Dyslipidemia', #0.2
+        # "PMH_Dyslipidemia",'Dyslipidemia', #0.2
           "PMH_Current_smoker",'Current smoker',
           "PMH_CKD",'CKD',
           "PMH_PAOD",'PAOD',
@@ -110,7 +110,7 @@ MV_COX_candi<-tribble(
           "Lactate_Lactic_acid_24",'Lactate 24h',
           #"Lactate_Lactic_acid_48",'Lactate 48h', #얘 있으면 BSI가 안나와
           "ECMO_CRRT",'CRRT',
-          "ECMO_Vasopressor",'Vasopressor', #0.2
+        #  "ECMO_Vasopressor",'Vasopressor', #0.2
           "dummy_VV",'VV-ECMO')
 
 MV_trim<-cox_trim%>%
