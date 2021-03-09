@@ -20,7 +20,10 @@ myt_output='HTML'
 ```
 # Inclusion
 ```{r result='asis'}
-inc_table%>%knitr::kable(format = 'pipe')%>%print()
+library(kableExtra)
+
+ex_table%>%kable()%>%
+    kable_styling()
 ```
 
 # Tables

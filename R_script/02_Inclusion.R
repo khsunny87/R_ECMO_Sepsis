@@ -10,33 +10,33 @@ Check_Name<-function(pt_name){
   return(F)
 }
 
-inc_table=list()
+ex_table=list()
 
 inc_data<-raw_data%>%
   filter(Insertion_Success_ECMO_implantation==1)%>%
   filter(Basic_이름!='윤재홍' & Basic_이름!='박융석')%>%
   filter(`Insertion_ECMO_시술일`<ymd("2020-7-1"))#count() #852
-inc_table[[1]]=c(inc_data%>%count()%>%.$n,inc_data%>%count()%>%.$n)
+ex_table[[1]]=c(inc_data%>%count()%>%.$n,0,'')
 
 
 inc_data<-inc_data%>%
   filter(Basic_나이>=18) #count() #765
-inc_table[[2]]<-c(0,inc_data%>%count()%>%.$n)
-inc_table[[2]][1]<-inc_table[[2]][2]-inc_table[[1]][2]
+ex_table[[2]]<-c(inc_data%>%count()%>%.$n,0,'18세 미만 제외')
+ex_table[[2]][2]<-ex_table[[1]][1]-ex_table[[2]][1]
 
 inc_data<-inc_data%>%
   filter(map_lgl(.$Basic_이름,Check_Name)) #709
-inc_table[[3]]<-c(0,inc_data%>%count()%>%.$n)
-inc_table[[3]][1]<-inc_table[[3]][2]-inc_table[[2]][2]
+ex_table[[3]]<-c(inc_data%>%count()%>%.$n,0,'반복 삽입 제외')
+ex_table[[3]][2]<-ex_table[[2]][1]-ex_table[[3]][1]
 
 inc_data<-inc_data%>%
   filter(Outcome_Weaning_success!='전원')#count() #705
-inc_table[[4]]<-c(0,inc_data%>%count()%>%.$n)
-inc_table[[4]][1]<-inc_table[[4]][2]-inc_table[[3]][2]
+ex_table[[4]]<-c(inc_data%>%count()%>%.$n,0,'전원 제외')
+ex_table[[4]][2]<-ex_table[[3]][1]-ex_table[[4]][1]
 
 
-inc_table<-do.call(rbind,inc_table)%>%data.frame()
-names(inc_table)<-c('Exclusion','Result')
+ex_table<-do.call(rbind,inc_table)%>%data.frame()
+names(ex_table)<-c('Result','Exclusion','Comment')
 
   #filter(Insertion_원내삽입)%>%
   
