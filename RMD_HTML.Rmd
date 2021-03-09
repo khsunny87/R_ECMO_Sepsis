@@ -19,7 +19,7 @@ source("R_script/99_Output.R")
 myt_output='HTML'
 ```
 # Inclusion
-```{r}
+```{r result='asis'}
 inc_table%>%knitr::kable(format = 'pipe')%>%print()
 ```
 
