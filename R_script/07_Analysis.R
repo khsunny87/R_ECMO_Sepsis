@@ -67,7 +67,11 @@ tddf<-tmerge(cut_data,cut_data,id=id,
 
 tddf$TS<-Surv(tddf$tstart,tddf$tstop,tddf$death)
 fit<-survfit(TS~tdBSI,data=tddf)
-Surv_plot<-ggsurvplot(fit,legend.title="",legend.labs=c('No BSI','BSI'))
+Surv_plot<-ggsurvplot(fit,legend.title="",surv.scale = "percent",legend.labs=c('No BSI','BSI'),pval="p < 0.001",xscale="d_y",break.time.by = 365.25,xlim=c(0,5*365.25),xlab='Years after ECMO initiation')
+Surv_plot$plot <- Surv_plot$plot + theme(
+    axis.title.x = element_text(face='bold'),
+  axis.title.y = element_text(face='bold')
+  )
 
 #MV Cox analysis
 cox_trim<-tddf%>%
