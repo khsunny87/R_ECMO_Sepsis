@@ -35,8 +35,8 @@ ex_table[[4]]<-list(inc_data%>%count()%>%.$n,0,'전원 제외')
 ex_table[[4]][2]<-ex_table[[3]][[1]]-ex_table[[4]][[1]]
 
 
-ex_table<-do.call(rbind,ex_table)%>%data.frame()
-names(ex_table)<-c('Result','Exclusion','Comment')
+#ex_table<-do.call(rbind,ex_table)%>%data.frame()
+#names(ex_table)<-c('Result','Exclusion','Comment')
 
   #filter(Insertion_원내삽입)%>%
   

@@ -108,11 +108,11 @@ MV_COX_candi<-tribble(
           "Pre_Lab_BUN",'BUN',
           "Pre_Lab_Cr",'Creatinine',
           "Pre_Lab_CRP",'CRP',
-          "Pre_Lab_WBC",'WBC',
+        #  "Pre_Lab_WBC",'WBC',
           "Pre_Lab_Seg",'Segmented neutrophil',
           "Lactate_Lactic_acid_00",'Lactate 0h',
           "Lactate_Lactic_acid_24",'Lactate 24h',
-          #"Lactate_Lactic_acid_48",'Lactate 48h', #얘 있으면 BSI가 안나와
+        #  "Lactate_Lactic_acid_48",'Lactate 48h', #얘 있으면 BSI가 안나와
           "ECMO_CRRT",'CRRT',
         #  "ECMO_Vasopressor",'Vasopressor', #0.2
           "dummy_VV",'VV-ECMO')

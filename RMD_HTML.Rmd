@@ -22,6 +22,14 @@ myt_output='HTML'
 ```{r result='asis'}
 library(kableExtra)
 
+anal_data<-anal_data%>%
+  filter(Group!=1)
+ex_table[[5]]<-list(anal_data%>%count()%>%.$n,0,'preECMO sepsis 제외')
+ex_table[[5]][2]<-ex_table[[4]][[1]]-ex_table[[5]][[1]]
+
+ex_table<-do.call(rbind,ex_table)%>%data.frame()
+names(ex_table)<-c('Result','Exclusion','Comment')
+
 ex_table%>%kable()%>%
     kable_styling()
 ```
@@ -43,7 +51,7 @@ extractOR(MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(MV_LR_res,type=2,show.CI = T)
 
 ren_MV_LR_res<-MV_LR_res
-names(ren_MV_LR_res$coefficients)<-c('(Intercept)','VV-ECMO','ECPR','Lactate at 24hr','CRRT','BSI','UTI')
+names(ren_MV_LR_res$coefficients)<-c('(Intercept)','VV-ECMO','ECPR','Lactate at 24hr','CRRT','BSI')#,'UTI')
 
 extractOR(ren_MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(ren_MV_LR_res,type=2,show.CI = T)
@@ -59,7 +67,11 @@ HRplot(MV_COX_res)
 
 ren_MV_COX_res<-MV_COX_res
 ren_MV_COX_res$coefficient
-names(ren_MV_COX_res$coefficients)<-c('BSI','ECPR','Age','Malignancy','LDH','BUN','CRP','Segmented neutrophil','Lactate at 24hr','CRRT','VV-ECMO')
+names(ren_MV_COX_res$coefficients)<-c('BSI','ECPR','Age',
+                                      #'Malignancy',
+                                      'LDH','BUN',
+                                      #'CRP',
+                                      'Segmented neutrophil','Lactate at 24hr','CRRT','VV-ECMO')
 extractHR(ren_MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(ren_MV_COX_res)
 
