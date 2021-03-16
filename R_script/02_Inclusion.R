@@ -34,8 +34,16 @@ inc_data<-inc_data%>%
 ex_table[[4]]<-list(inc_data%>%count()%>%.$n,0,'전원 제외')
 ex_table[[4]][2]<-ex_table[[3]][[1]]-ex_table[[4]][[1]]
 
+
 inc_data<-inc_data%>%
-  filter(!((str_detect(Basic_Primary_Dx,"pneumonia")&(Insertion_ECMO_type=='VV-ECMO'))|Insertion_삽입이유=='Septic shock')) #663
+  filter(
+         !(
+            (
+              str_detect(Basic_Primary_Dx,"(?i)pneumonia|VAP|HAP")&(Insertion_ECMO_type=='VV-ECMO')
+            ) |
+            Insertion_삽입이유=='Septic shock'
+         )
+        )#%>%select(Basic_Primary_Dx,Insertion_ECMO_type,Insertion_삽입이유)%>%View() #663
 ex_table[[5]]<-list(inc_data%>%count()%>%.$n,0,'preECMO sepsis 제외')
 ex_table[[5]][2]<-ex_table[[4]][[1]]-ex_table[[5]][[1]]
 

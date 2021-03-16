@@ -11,7 +11,7 @@ library(stats)
 
 sig_var<-table1$res%>%
   filter(as.numeric(p)<0.05)%>%.[[1]]%>%str_trim()
-#sig_var
+LR_sig<-sig_var
 #LR_df%>%names()
 
 LR_df<-anal_data%>%
@@ -86,8 +86,8 @@ cox_trim<-tddf%>%
 
 UV_COX_res=mycph(TS~.,data=cox_trim)
 
-#UV_COX_res%>%
-#  filter(p<0.05)%>%row.names()
+COX_sig<-UV_COX_res%>%
+  filter(p<0.05)%>%row.names()
 
 MV_COX_candi<-tribble(
           ~col_name,~label,
@@ -109,7 +109,7 @@ MV_COX_candi<-tribble(
           "Pre_Lab_BUN",'BUN',
           "Pre_Lab_Cr",'Creatinine',
           "Pre_Lab_CRP",'CRP',
-        #  "Pre_Lab_WBC",'WBC',
+          "Pre_Lab_WBC",'WBC',
           "Pre_Lab_Seg",'Segmented neutrophil',
           "Lactate_Lactic_acid_00",'Lactate 0h',
           "Lactate_Lactic_acid_24",'Lactate 24h',

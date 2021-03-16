@@ -40,11 +40,13 @@ table5
 # Analysis
 ```{r results = 'asis'}
 source("R_script/07_Analysis.R")
+print(LR_sig)
+
 extractOR(MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(MV_LR_res,type=2,show.CI = T)
 
 ren_MV_LR_res<-MV_LR_res
-names(ren_MV_LR_res$coefficients)<-c('(Intercept)','VV-ECMO','ECPR','Lactate at 24hr','CRRT','BSI')#,'UTI')
+names(ren_MV_LR_res$coefficients)<-c('(Intercept)','VV-ECMO','ECPR','Platelet','Lactate at 24hr','CRRT','WBC','BSI')#,'UTI')
 
 extractOR(ren_MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(ren_MV_LR_res,type=2,show.CI = T)
@@ -54,19 +56,22 @@ Surv_plot
 UV_COX_res%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(UV_COX_res,type=2,show.CI=TRUE)
 
+print(COX_sig)
+
 extractHR(MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(MV_COX_res)
 
 
 ren_MV_COX_res<-MV_COX_res
-ren_MV_COX_res$coefficient
+#ren_MV_COX_res$coefficient
 names(ren_MV_COX_res$coefficients)<-c('BSI',
                                       'ECPR',
-                                      'Hb',
+                                      'Platelet',
                                       'BUN',
-                                      'CRP',
                                       'Segmented neutrophil',
-                                      'Lactate at 24hr','CRRT','VV-ECMO')
+                                      'Lactate at 24hr',
+                                      'CRRT',
+                                      'VV-ECMO')
 extractHR(ren_MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(ren_MV_COX_res)
 
