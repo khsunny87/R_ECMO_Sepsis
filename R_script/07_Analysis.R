@@ -20,7 +20,7 @@ LR_df<-anal_data%>%
   ##여기서 끊으면 기존 plot
   select(Outcome_Weaning_success,dummy_VV,dummy_Others,contains(anal_data[get_label(anal_data)%in%sig_var]%>%names()))%>%
   select(-Outcome_Death,-Insertion_ECMO_type,-Outcome_Death_date,-Outcome_Survival_discharge,-ECMO_duration,-Lactate_Lactic_acid_48)%>%
-#  select(-Group)%>% #0.2
+ # select(-ECMO_Vasopressor)%>% #0.2
   na.omit()
 
 
@@ -29,7 +29,8 @@ LR_df<-anal_data%>%
 res<-glm(as.factor(Outcome_Weaning_success)~.,family=binomial,data=LR_df)
 MV_LR_res<-step(res,direction="backward",trace=T)
 
-
+#extractOR(MV_LR_res)
+#ORplot(MV_LR_res)
 
 #anova(out,test='Chisq')%>%print()
 #res%>%print()
