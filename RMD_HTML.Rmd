@@ -40,7 +40,9 @@ table5
 # Analysis
 ```{r results = 'asis'}
 source("R_script/07_Analysis.R")
-print(LR_sig)
+LR_sig%>%knitr::kable()%>%print()
+
+
 
 extractOR(MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(MV_LR_res,type=2,show.CI = T)
@@ -56,7 +58,7 @@ Surv_plot
 UV_COX_res%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(UV_COX_res,type=2,show.CI=TRUE)
 
-print(COX_sig)
+COX_sig%>%knitr::kable()%>%print()
 
 extractHR(MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(MV_COX_res)
