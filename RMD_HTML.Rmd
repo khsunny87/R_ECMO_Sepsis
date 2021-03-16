@@ -22,13 +22,6 @@ myt_output='HTML'
 ```{r result='asis'}
 library(kableExtra)
 
-anal_data<-anal_data%>%
-  filter(Group!=1)
-ex_table[[5]]<-list(anal_data%>%count()%>%.$n,0,'preECMO sepsis 제외')
-ex_table[[5]][2]<-ex_table[[4]][[1]]-ex_table[[5]][[1]]
-
-ex_table<-do.call(rbind,ex_table)%>%data.frame()
-names(ex_table)<-c('Result','Exclusion','Comment')
 
 ex_table%>%kable()%>%
     kable_styling()
