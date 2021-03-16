@@ -68,6 +68,10 @@ table4<-tbl_data%>% # Blood culture during ECMO
 
 Cate_label<-c('Total','BSI','RTI','UTI','SSI','Others')
 
+
+r_Cx<-r_Cx%>%
+  filter(ID%in%anal_data$Basic_Hospital_ID)  #preSepsis 제외
+
 Org_tbl<-r_Cx%>%
   Organism_list(length=10)%>%
   Get_DF()
