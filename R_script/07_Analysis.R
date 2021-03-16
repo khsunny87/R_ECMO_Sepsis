@@ -105,7 +105,7 @@ MV_COX_candi<-tribble(
           "PMH_PAOD",'PAOD',
           "Pre_Lab_Hb",'Hb',
           "Pre_Lab_Plt",'Platelet',
-          "Pre_Lab_LDH",'LDH',
+        #  "Pre_Lab_LDH",'LDH',
           "Pre_Lab_BUN",'BUN',
           "Pre_Lab_Cr",'Creatinine',
           "Pre_Lab_CRP",'CRP',

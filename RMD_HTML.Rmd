@@ -67,11 +67,13 @@ HRplot(MV_COX_res)
 
 ren_MV_COX_res<-MV_COX_res
 ren_MV_COX_res$coefficient
-names(ren_MV_COX_res$coefficients)<-c('BSI','ECPR','Age',
-                                      #'Malignancy',
-                                      'LDH','BUN',
-                                      #'CRP',
-                                      'Segmented neutrophil','Lactate at 24hr','CRRT','VV-ECMO')
+names(ren_MV_COX_res$coefficients)<-c('BSI',
+                                      'ECPR',
+                                      'Hb',
+                                      'BUN',
+                                      'CRP',
+                                      'Segmented neutrophil',
+                                      'Lactate at 24hr','CRRT','VV-ECMO')
 extractHR(ren_MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(ren_MV_COX_res)
 
