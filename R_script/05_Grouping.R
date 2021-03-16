@@ -11,7 +11,7 @@ replace_na2<-function(data,col_vector){
   replace_na(data,map(tmp,~.))
 }
 Grouping<-function(Dx,ECMO_type,Cause,Cx_during_ECMO){
-  return(if_else(str_detect(Dx,"pneumonia")&(ECMO_type=='VV-ECMO')|Cause=='Septic shock',1,if_else(Cx_during_ECMO,2,0)))
+  return(if_else(str_detect(Dx,"(?i)pneumonia|VAP|HAP")&(ECMO_type=='VV-ECMO')|Cause=='Septic shock',1,if_else(Cx_during_ECMO,2,0)))
 }
 
 
