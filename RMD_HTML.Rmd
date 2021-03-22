@@ -21,10 +21,13 @@ myt_output='HTML'
 # Inclusion
 ```{r result='asis'}
 library(kableExtra)
-
+library(DiagrammeR)
 
 ex_table%>%kable()%>%
     kable_styling()
+
+source("R_script/98_Study_FC.R")
+print(study_FC)
 ```
 
 # Tables
