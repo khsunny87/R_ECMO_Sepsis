@@ -1,4 +1,6 @@
 library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
 flowchart<-"digraph study_FC {
   # a 'graph' statement
   graph [fontname = Helvetica]
@@ -28,6 +30,4 @@ flowchart<-"digraph study_FC {
   
 }"
 #[1]: 'ECMO insertion\\nFrom Jan 2014 to June 2020\\n(N=852)'"
-study_FC<-grViz(flowchart)
-
 

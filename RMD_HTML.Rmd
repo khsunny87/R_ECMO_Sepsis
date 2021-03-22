@@ -22,12 +22,18 @@ myt_output='HTML'
 ```{r result='asis'}
 library(kableExtra)
 library(DiagrammeR)
+library(rsvg)
 
 ex_table%>%kable()%>%
     kable_styling()
 
 source("R_script/98_Study_FC.R")
-print(study_FC)
+grViz(flowchart)
+grViz(flowchart)%>%
+  export_svg() %>%
+  charToRaw() %>%
+  rsvg_png('Result/study_flow_chart.png')
+
 ```
 
 # Tables

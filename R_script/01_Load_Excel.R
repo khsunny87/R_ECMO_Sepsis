@@ -20,7 +20,7 @@ names(tmp_data)<-var_name
 eff_var<-var_name[!is.na(tmp[[1]])]
 
 ECMO_cause<-c('Cardiopulmonary arrest','Cardiogenic shock',
-             'Respiratoy failure','Weaning faiure of CPB',
+             'Respiratory failure','Weaning failure of CPB',
              'Septic shock','Others')
 ECMO_type<-c('VA-ECMO','VV-ECMO','E-LVAD','E-RVAD','Others')
 
