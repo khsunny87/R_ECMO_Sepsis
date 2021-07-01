@@ -7,7 +7,7 @@ library(moonBook)
 
 
 #에크모 데이터 로딩
-fname<-'Input/[201001] ECMO CRF.xlsx'
+fname<-'Input/ECMO_Sepsis_YHC_data.xlsx'
 
 #변수설정
 read_excel(fname,n_max=2,col_names=F)%>%t()%>%as.data.frame()->tmp

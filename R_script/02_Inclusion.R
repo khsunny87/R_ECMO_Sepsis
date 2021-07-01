@@ -55,7 +55,7 @@ names(ex_table)<-c('Result','Exclusion','Comment')
   #filter(Insertion_원내삽입)%>%
   
 
-inc_data%>%count()
+#inc_data%>%count()
 "
 inc_data%>%
   select(Basic_Hospital_ID,Basic_이름,Basic_나이,Insertion_ECMO_시술일,Outcome_Death,Outcome_Death_date,Outcome_Last_FU_date)%>%
