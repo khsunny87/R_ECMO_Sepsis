@@ -30,7 +30,7 @@ labels[label_data$var_name]<-label_data$label
 anal_data<-set_label(anal_data,labels)
 
 tbl_data<-anal_data%>%
-  select(-Basic_Hospital_ID,-Basic_이름,-Insertion_ECMO_시술일,-Basic_Primary_Dx,-Insertion_원내삽입,-Insertion_Success_ECMO_implantation,-Outcome_ECMO_제거일,-Outcome_Death_date,-Outcome_Discharge_date,-Outcome_Last_FU_date,-Complication_Sepsis)%>%
+  select(-Basic_Case_ID,-Basic_Hospital_ID,-Basic_이름,-Insertion_ECMO_시술일,-Basic_Primary_Dx,-Insertion_원내삽입,-Insertion_Success_ECMO_implantation,-Outcome_ECMO_제거일,-Outcome_Death_date,-Outcome_Discharge_date,-Outcome_Last_FU_date,-Complication_Sepsis)%>%
   mutate(Group=factor(group_name[anal_data$Group+1],levels=group_name))
   
 tbl_data$Outcome_Weaning_success<-set_labels(tbl_data$Outcome_Weaning_success,labels=c('0'="No",'1'="Yes",'전원'="Transfer"))
