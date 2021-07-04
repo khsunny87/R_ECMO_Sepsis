@@ -19,6 +19,7 @@ LR_df<-anal_data%>%
   mutate(dummy_VV=(Insertion_ECMO_type=='VV-ECMO'),dummy_Others=!(Insertion_ECMO_type %in% c('VA-ECMO','VV-ECMO')))%>%
   ##여기서 끊으면 기존 plot
   select(Outcome_Weaning_success,dummy_VV,dummy_Others,contains(anal_data[get_label(anal_data)%in%sig_var]%>%names()))%>%
+  #select(-starts_with('TF_'))%>%
   select(-Outcome_Death,-Insertion_ECMO_type,-Outcome_Death_date,-Outcome_Survival_discharge,-ECMO_duration,-Lactate_Lactic_acid_48)%>%
  # select(-ECMO_Vasopressor)%>% #0.2
   na.omit()
@@ -27,7 +28,8 @@ LR_df<-anal_data%>%
 #res<-glm(as.factor(Outcome_Weaning_success)~Blood_Cx+Respi_Cx+Urine_Cx+Insertion_삽입이유+dummy_VV+dummy_Others+PMH_HTN+PMH_Malignancy+PMH_PAOD+PMH_CKD+ECPR_ECPR+ECMO_CRRT,family=binomial,data=LR_df)
 
 res<-glm(as.factor(Outcome_Weaning_success)~.,family=binomial,data=LR_df)
-MV_LR_res<-step(res,direction="backward",trace=T)
+MV_LR_res<-step(res,direction="both",trace=T)
+#MV_LR_res<-step(res,direction="backward",trace=T)
 
 #extractOR(MV_LR_res)
 #ORplot(MV_LR_res)
@@ -122,12 +124,11 @@ MV_trim<-cox_trim%>%
   select(TS,contains(MV_COX_candi$col_name))%>%
   na.omit()
 res<-coxph(TS~.,data=MV_trim)
-MV_COX_res<-  step(res,direction='backward',trace=T) # MV 
+#MV_COX_res<-  step(res,direction='backward',trace=T) # MV 
+MV_COX_res<-  step(res,direction='both',trace=T) # MV 
 
 
-
-
-#HRplot(res,type=2,show.CI=TRUE)%>%print()
+#HRplot(MV_COX_res,type=2,show.CI=TRUE)%>%print()
 
 # END
 

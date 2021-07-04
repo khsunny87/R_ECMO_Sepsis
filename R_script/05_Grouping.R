@@ -18,10 +18,14 @@ Grouping<-function(Dx,ECMO_type,Cause,Cx_during_ECMO){
 #anal_data<-left_join(inc_data,sum_Cx,by=c('Basic_Hospital_ID'='ID'))%>%
 #  replace_na(list(Cx_before_ECMO=F,Cx_during_ECMO=F,LM_Cx=F,Blood_Cx=F,LM_Blood=F,Respi_Cx=F,LM_Respi=F))
 
+raw_TF_data<-read_csv('Input/TF_count.csv')
+
+
 anal_data<-left_join(inc_data,sum_Cx,by=c('Basic_Hospital_ID'='ID'))%>%
   replace_na2(Cx_list)%>%
   mutate(ECMO_duration=(Outcome_ECMO_제거일-Insertion_ECMO_시술일)/ddays(1))%>%
-  mutate(Basic_성별=(Basic_성별==1))
+  mutate(Basic_성별=(Basic_성별==1))%>%
+  left_join(.,raw_TF_data,by=c('Basic_Case_ID'='Case_ID'))
 
 anal_data$Group<-Grouping(anal_data$Basic_Primary_Dx,anal_data$Insertion_ECMO_type,anal_data$Insertion_삽입이유,anal_data$Cx_during_ECMO)
 

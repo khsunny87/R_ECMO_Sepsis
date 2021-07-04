@@ -57,7 +57,7 @@ extractOR(MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(MV_LR_res,type=2,show.CI = T)
 
 ren_MV_LR_res<-MV_LR_res
-names(ren_MV_LR_res$coefficients)<-c('(Intercept)','VV-ECMO','ECPR','Platelet','Lactate at 24hr','CRRT','WBC','BSI')#,'UTI')
+names(ren_MV_LR_res$coefficients)<-c('(Intercept)','VV-ECMO','ECPR','Lactate at 24hr','CRRT','WBC','BSI','RBC Transfusion','Platelet Transfusion','FFP Transfusion')#,'UTI')
 
 extractOR(ren_MV_LR_res)%>%knitr::kable(format = 'pipe')%>%print()
 ORplot(ren_MV_LR_res,type=2,show.CI = T)
@@ -74,15 +74,8 @@ HRplot(MV_COX_res)
 
 
 ren_MV_COX_res<-MV_COX_res
-#ren_MV_COX_res$coefficient
-names(ren_MV_COX_res$coefficients)<-c('BSI',
-                                      'ECPR',
-                                      'Platelet',
-                                      'BUN',
-                                      'Segmented neutrophil',
-                                      'Lactate at 24hr',
-                                      'CRRT',
-                                      'VV-ECMO')
+ren_MV_COX_res$coefficient
+names(ren_MV_COX_res$coefficients)<-c('BSI','ECPR','Platelet','BUN','Segmented neutrophil','Lactate at 24hr','CRRT','VV-ECMO')
 extractHR(ren_MV_COX_res)%>%knitr::kable(format = 'pipe')%>%print()
 HRplot(ren_MV_COX_res)
 

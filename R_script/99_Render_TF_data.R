@@ -27,18 +27,11 @@ raw_TF%>%
             TRUE ~ ""))%>%ungroup()%>%
   group_by(Case_ID,type)%>%summarise(units=sum(units))%>%
   filter(type!="")%>%
-  pivot_wider(names_from = type, names_prefix = "TF_",values_from = units)%>%
-  select(Case_ID,TF_RBC,TF_Platelet,TF_FFP,TF_Cryoprecipitate)%>%
+  pivot_wider(names_from = type, names_prefix = "TF_",values_from = units,values_fill=0)%>%
+  mutate(TF_Total=TF_RBC+TF_Platelet+TF_FFP+TF_Cryoprecipitate)%>%
+  select(Case_ID,TF_Total,TF_RBC,TF_Platelet,TF_FFP,TF_Cryoprecipitate)%>%
   write_excel_csv('Input/TF_count.csv')
 
+
 ?pivot_wider
-?case_when
-?if_else
-raw_TF%>%
-  group_by(혈액제제구분코드,`처방명(혈액명)`)%>%
   
-  summarise()
-  
-
-
-anal_data$Insertion_ECMO_시술일%>%str()
