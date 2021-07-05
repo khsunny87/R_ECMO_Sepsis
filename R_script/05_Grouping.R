@@ -27,6 +27,10 @@ anal_data<-left_join(inc_data,sum_Cx,by=c('Basic_Hospital_ID'='ID'))%>%
   mutate(Basic_성별=(Basic_성별==1))%>%
   left_join(.,raw_TF_data,by=c('Basic_Case_ID'='Case_ID'))
 
+anal_data$OTT_BSI<-anal_data%>%
+  select(ends_with('_Cx'),-Blood_Cx)%>%
+  apply(.,1,any)
+
 anal_data$Group<-Grouping(anal_data$Basic_Primary_Dx,anal_data$Insertion_ECMO_type,anal_data$Insertion_삽입이유,anal_data$Cx_during_ECMO)
 
 

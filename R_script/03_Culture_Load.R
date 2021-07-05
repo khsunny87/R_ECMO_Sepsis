@@ -42,7 +42,8 @@ r_Cx<-inner_join(raw_Cx,inc_data%>%select(Basic_Hospital_ID,Insertion_ECMO_ì‹œìˆ
   mutate(Blood_Cx=Cx_during_ECMO & Cate_sp=='BSI')%>%
   mutate(Respi_Cx=Cx_during_ECMO & Cate_sp=='RTI')%>%
   mutate(Urine_Cx=Cx_during_ECMO & Cate_sp=='UTI')%>%
-  mutate(Wound_Cx=Cx_during_ECMO & Cate_sp=='SSI')
+  mutate(Wound_Cx=Cx_during_ECMO & Cate_sp=='SSI')%>%
+  mutate(Other_Cx=Cx_during_ECMO & Cate_sp=='Others')
   #mutate(BSI_SA=Blood_Cx&(SP1=='Staphylococcus aureus'|SP2=='Staphylococcus aureus'|SP3=='Staphylococcus aureus'|SP4=='Staphylococcus aureus'))%>%
   #mutate(LM_Blood=LM_Cx&Blood_Cx,LM_Respi=LM_Cx&Respi_Cx,LM_Urine=LM_Cx&Urine_Cx,LM_Wound=LM_Cx&Wound_Cx)
 
